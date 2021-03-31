@@ -7,6 +7,7 @@ const Campuses = ({campuses, destroy}) => {
 
   return(
    <ul className = 'campuses'>
+      <Link to='/campuses/create'><h3>CREATE CAMPUSE</h3></Link>
      {
        campuses.map(campus => {
          return(

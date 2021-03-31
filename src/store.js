@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import { createDispatchHook } from 'react-redux';
 
 //action types
 const GET_CAMPUSES = 'GET_CAMPUSES';
@@ -34,7 +35,7 @@ const _destroyCampus = (campus) => {
   }
 };
 
-const _updateCampus = () => {
+const _updateCampus = (campus) => {
   return {
     type: UPDATE_CAMPUS,
     campus
@@ -69,6 +70,13 @@ const _updateStudent = (student) => {
   }
 };
 
+const _unregisterStudent = (student) => {
+  return {
+    type: UNREGISTER_STUDENT,
+    student
+  }
+}
+
 //thunks
 const getCampuses = () => {
   return async(dispatch) => {
@@ -77,17 +85,19 @@ const getCampuses = () => {
   }
 };
 
-const createCampus = (campus) => {
+const createCampus = (name, address, description, history) => {
   return async(dispatch) => {
-    const created = (await axios.post('/api/campuses', campus)).data;
-    return dispatch(_createCampus(created));
+    const campus = (await axios.post('/api/campuses', {name, address, description})).data;
+    dispatch(_createCampus(campus));
+    history.push(`/campuses/${campus.id}`)
   }
 };
 
-const updateCampus = (campus, history) => {
+const updateCampus = (id, name, address, description, history) => {
   return async(dispatch) => {
-    const updated = (await axios.put(`/api/campuses/${campus.id}`, campus)).data;
-    return dispatch(_updateCampus(updated));
+    const campus = (await axios.put(`/api/campuses/${id}`, {name, address, description})).data;
+    dispatch(_updateCampus(campus));
+    history.push(`/campuses/${campus.id}`)
   }
 }
 
@@ -106,25 +116,32 @@ const getStudents = () => {
   }
 };
 
-const createStudent = () => {
+const createStudent = (firstName, lastName, email, gpa, history) => {
   return async(dispatch) => {
-    const create = (await axios.post('/api/students', student)).data;
-    return dispatch(_createStudent(create))
+    const student= (await axios.post('/api/students', {firstName, lastName, email, gpa})).data;
+    dispatch(_createStudent(student));
+    history.push(`/students/${student.id}`)
+
   }
 };
 
-const updateStudent = () => {
+
+const updateStudent = (id, firstName, lastName, email, gpa, history) => {
   return async(dispatch) => {
-    const update = (await axios.get(`/api/students/${student.id}`, student)).data;
-    return dispatch(_updateStudent(update))
+    const student = (await axios.put(`/api/students/${id}`, {firstName, lastName, email, gpa})).data;
+    dispatch(_updateStudent(student));
+    history.push(`/students/${id}`)
   }
 };
+
+
+
 
 const destroyStudent = (student, history) => {
   return async(dispatch) => {
     await axios.delete(`/api/students/${student.id}`)
     dispatch(_destroyStudent(student));
-    history.push('/studets')
+    history.push('/students')
   }
 }
 

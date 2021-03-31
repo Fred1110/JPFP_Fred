@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createCampus} from './store';
+import {Link} from 'react-router-dom';
 
 class CampusCreate extends Component{
   constructor(){
@@ -8,6 +9,7 @@ class CampusCreate extends Component{
     this.state = {
       name: '',
       address: '',
+      description:'',
       error: ''
     }
     this.onChange = this.onChange.bind(this);
@@ -23,14 +25,15 @@ class CampusCreate extends Component{
   async onSave(evt){
     evt.preventDefault();
     try {
-      await this.props.create(campus);
+      await this.props.create(this.state.name, this.state.address, this.state.description);
     } catch (error) {
-      console.log({error: error.response.data.error})
+      console.log(error)
+      this.setState({error: error.response.data.error})
     }
   }
 
   render(){
-    const { name, address, error } = this.state;
+    const { name, address, description, error } = this.state;
     const {onChange, onSave} = this;
     return (
       <form onSubmit = { onSave}>
@@ -39,8 +42,9 @@ class CampusCreate extends Component{
             !!error && JSON.stringify(error, null, 2)
           }
         </pre>
-        <input name = 'name' value = {name} onChange = {onChange} />
-        <input name = 'address' value = {address} onChange = {onChange} />
+        Campus Name: <input name = 'name' value = {name} onChange = {onChange} />
+        Campus Address: <input name = 'address' value = {address} onChange = {onChange} />
+        Description: <input name = 'description' value = {description} onChange = {onChange} />
         <button>SAVE</button>
       </form>
     )
@@ -49,9 +53,9 @@ class CampusCreate extends Component{
 
 export default connect(
   null,
-  (dispatch) => {
+  (dispatch, {history}) => {
     return {
-      create: (campus) => dispatch(createCampus(campus))
+      create: (name, address, description) => dispatch(createCampus(name, address, description, history))
     }
   }
   )(CampusCreate);

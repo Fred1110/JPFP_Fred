@@ -37,7 +37,7 @@ app.get('/api/campuses/:id', async(req, res, next) => {
 //create campus
 app.post('/api/campuses', async(req, res, next) => {
   try {
-    const campus = Campuses.create(req.body);
+    const campus = await Campuses.create(req.body);
     res.status(201).send(campus);
   } catch (error) {
     next(error)
@@ -113,11 +113,17 @@ app.put('/api/students/:id', async(req, res, next) => {
 app.delete('/api/students/:id', async(req, res, next) => {
   try {
     const student = await Students.findByPk(req.params.id);
-    res.status(204).send(await Student.destroy())
+    res.status(204).send(await student.destroy())
   } catch (error) {
     next(error)
   }
 });
+
+
+
+app.use((err, req, res, next) => {
+  res.status(500).send({error:err})
+})
 
 //data models
 const Sequelize = require('sequelize');
@@ -282,7 +288,7 @@ const syncAndSeed = async() => {
       campusId: PCC.id,
       email: 'penny@pasadena.edu',
       gpa: 3.0,
-      imageUrl: 'https://static.wikia.nocookie.net/bigbangtheory/images/4/4d/TCCO-6.jpg/revision/latest?cb=20190512163833'
+      imageUrl: 'https://img1.looper.com/img/gallery/the-absolute-worst-thing-penny-has-ever-done-on-the-big-bang-theory/intro-1584114909.jpg'
     },
 
     {

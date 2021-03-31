@@ -33,11 +33,11 @@ class Main extends Component {
 
           <Switch>
             <Route path='/campuses' exact component = {Campuses} />
-            <Route path='/students' exact component  = {Students} />
-            <Route path = '/campuses/:id' exact component = {Campus} />
             <Route path = '/campuses/create' component = {CampusCreate} />
-            <Route path='/students/:id' exact component = {Student} />
+            <Route path='/students' exact component  = {Students} />
             <Route path = '/students/create' component = {StudentCreate} />
+            <Route path = '/campuses/:id' exact component = {Campus} />
+            <Route path='/students/:id' exact component = {Student} />
             <Route path = '/campuses/:id/update' component = {CampusUpdate} />
             <Route path='/students/:id/update' component = {StudentUpdate} />
           </Switch>

@@ -9,8 +9,7 @@ class StudentUpdate extends Component {
       firstName: this.props.student.id ? this.props.student.firstName : '',
       lastName: this.props.student.id ? this.props.student.lastName : '',
       email: this.props.student.id ? this.props.student.email : '',
-      gpa: this.props.student.id ? this.props.student.gpa : '',
-      campus: this.props.student.id ? this.props.student.campus.id : '',
+      gpa: this.props.student.id ? this.props.student.gpa : 0,
       error: ''
     }
     this.onSave = this.onSave.bind(this);
@@ -21,16 +20,16 @@ class StudentUpdate extends Component {
       this.setState({firstName: this.props.student.firstName}),
       this.setState({lastName: this.props.student.lastName}),
       this.setState({email: this.props.student.email}),
-      this.setState({gpa: this.props.student.gpa}),
-      this.setState({campus: this.props.student.campus.id})
+      this.setState({gpa: this.props.student.gpa})
     }
   }
 
   async onSave(evt){
     evt.preventDefault();
     try {
-      await this.props.update(this.props.student.id, this.state.student.firstName, this.state.student.lastName, this.state.student.email, this.state.student.gpa, this.state.student.campus)
+      await this.props.update(this.props.student.id, this.state.firstName, this.state.lastName, this.state.email, this.state.gpa)
     } catch (error) {
+      console.log(error)
       this.setState({error: error.response.data.error})
     }
   }
@@ -42,7 +41,7 @@ class StudentUpdate extends Component {
   }
 
   render(){
-    const {firstName, lastName, email, gpa, campus, error} = this.state;
+    const {firstName, lastName, email, gpa, error} = this.state;
     const {onChange, onSave} = this;
     return (
       <form onSubmit = {onSave}>
@@ -51,11 +50,10 @@ class StudentUpdate extends Component {
             !!error && JSON.stringify(error, null, 2)
           }
         </pre>
-        <input name ='firstName' value = {firstName} onChange = {onChange} />
-        <input name ='lastName' value = {lastName} onChange = {onChange} />
-        <input name ='email' value = {email} onChange = {onChange} />
-        <input name ='gpa' value = {gpa} onChange = {onChange} />
-        <input name ='campus' value = {campus} onChange = {onChange} />
+        First Name: <input name ='firstName' value = {firstName} onChange = {onChange} />
+        Last Name: <input name ='lastName' value = {lastName} onChange = {onChange} />
+        Email: <input name ='email' value = {email} onChange = {onChange} />
+        GPA: <input name ='gpa' value = {gpa} onChange = {onChange} />
         <button>SAVE</button>
       </form>
     )
@@ -71,7 +69,7 @@ export default connect (
   },
   (dispatch, {history}) => {
     return {
-      update: (id, firstName, lastName, email, gpa, campus) => dispatch(updateStudent(id, firstName, lastName, email, gpa, campus, history))
+      update: (id, firstName, lastName, email, gpa) => dispatch(updateStudent(id, firstName, lastName, email, gpa, history))
     }
   }
 )(StudentUpdate)

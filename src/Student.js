@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-const Student = ({student}) => {
+const Student = ({student, campus}) => {
   if(!student.id){
-    return '...loading user';
+    return '...loading student';
   }
   return (
     <div>
@@ -15,6 +15,9 @@ const Student = ({student}) => {
           <img key ={student.id} src={student.imageUrl} />
           <h4>First Name: {student.firstName}</h4>
           <h4>Last Name: {student.lastName}</h4>
+
+          <h4>Campus: {campus ? <Link to={`/campuses/${campus.id}`}> {campus.name} </Link>: 'Currently Not Enrolled' }</h4>
+
           <h4>Email: {student.email}</h4>
           <h4>GPA: {student.gpa}</h4>
           <Link to={`/students/${student.id}/update`}>UPDATE</Link>
@@ -27,8 +30,10 @@ const Student = ({student}) => {
 export default connect(
   (state, otherProps) => {
     const student = state.students.find(student => student.id === otherProps.match.params.id * 1) || {};
+    const campus = state.campuses.find(campus => campus.id === student.campusId * 1)
     return {
-      student
+      student,
+      campus
     }
   },
     null

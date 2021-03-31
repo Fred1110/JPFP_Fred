@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {createStudent} from './store';
+import {Link} from 'react-router-dom';
 
 class StudentCreate extends Component{
   constructor(){
@@ -9,10 +10,11 @@ class StudentCreate extends Component{
       firstName: '',
       lastName: '',
       email:'',
+      gpa: 0,
       error: ''
     }
     this.onChange = this.onChange.bind(this);
-    this. onSave = this.onSave.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   onChange(evt){
@@ -24,16 +26,14 @@ class StudentCreate extends Component{
   async onSave(evt){
     evt.preventDefault();
     try {
-      await this.props.create(this.state.firstName);
-      await this.props.create(this.state.lastName);
-      await this.props.create(this.state.email);
+      await this.props.create(this.state.firstName, this.state.lastName, this.state.email, this.state.gpa);
     } catch (error) {
-      console.log({error: error.response.data.error})
+      this.setState({error: error.response.data.error})
     }
   }
 
   render(){
-    const { firstName, lastName, email, error } = this.state;
+    const { firstName, lastName, email, gpa, error } = this.state;
     const {onChange, onSave} = this;
     return (
       <form onSubmit = { onSave}>
@@ -42,9 +42,10 @@ class StudentCreate extends Component{
             !!error && JSON.stringify(error, null, 2)
           }
         </pre>
-        <input name = 'firsName' value = {firstName} onChange = {onChange} />
-        <input name = 'lastName' value = {lastName} onChange = {onChange} />
-        <input name = 'lastName' value = {email} onChange = {onChange} />
+        First Name:<input name = 'firstName' value = {firstName} onChange = {onChange} />
+        Last Name:<input name = 'lastName' value = {lastName} onChange = {onChange} />
+        Email: <input name = 'email' value = {email} onChange = {onChange} />
+        GPA: <input name = 'gpa' value = {gpa} onChange = {onChange} />
         <button>SAVE</button>
       </form>
     )
@@ -55,9 +56,7 @@ export default connect(
   null,
   (dispatch, {history}) => {
     return {
-      createFirstName: (firstName) => dispatch(createStudent(firstName, history)),
-      createLastName: (lastName) => dispatch(createStudent(lastName, history)),
-      createEmail: (email) => dispatch(createStudent(email, history))
+      create: (firstName, lastName, email, gpa) => dispatch(createStudent(firstName, lastName, email, gpa, history))
     }
   }
   )(StudentCreate);

@@ -6,6 +6,7 @@ import {destroyStudent} from './store';
 const Students = ({students, destroy}) => {
  return(
    <ul>
+     <Link to='/students/create'><h3>CREATE STUDENT</h3></Link>
      {
        students.map(student=> {
          return(
@@ -15,7 +16,6 @@ const Students = ({students, destroy}) => {
              <h2>{student.firstName}</h2>
                </Link>
               <button onClick={()=> destroy(student)}>X</button>
-
            </li>
          )
        })
