@@ -12,18 +12,35 @@ import Student from './Student'
 import StudentUpdate from './StudentUpdate';
 import StudentCreate from './StudentCreate';
 
+
 const Home = () => {
   return <hr />
 }
 
 
 class Main extends Component {
+  // constructor(){
+  //   super();
+  //   this.state = {
+  //     campusId: ''
+  //   }
+  //   this.unregister = this.unregister.bind(this)
+  // }
   componentDidMount(){
     this.props.loadCampuses(),
     this.props.loadStudents()
   }
+
+  // unregister(){
+  //   this.setState({campusId: 0})
+  // }
+
   render(){
+    // const {campusId} = this.state
+    // const unregister = this.unregister
     return (
+      // <div id='main'>
+      //   <Campus campusId = {campusId} unregister = {unregister} />
       <Router>
         <div>
           <h1>
@@ -44,6 +61,8 @@ class Main extends Component {
 
         </div>
       </Router>
+      // </div>
+
     )
   }
 };

@@ -12,6 +12,7 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const CREATE_STUDENT = 'CREATE_STUDENT';
 const DESTROY_STUDENT = 'DESTROY_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
+const UNREGISTER_STUDENT = 'UNREGISTER_STUDENT';
 
 //action creator
 const _getCampuses = (campuses) => {
@@ -124,8 +125,7 @@ const createStudent = (firstName, lastName, email, gpa, history) => {
 
   }
 };
-
-
+//add campusId here?
 const updateStudent = (id, firstName, lastName, email, gpa, history) => {
   return async(dispatch) => {
     const student = (await axios.put(`/api/students/${id}`, {firstName, lastName, email, gpa})).data;
@@ -134,7 +134,12 @@ const updateStudent = (id, firstName, lastName, email, gpa, history) => {
   }
 };
 
-
+const unregisterStudent = (id) => {
+  return async(dispatch) => {
+    const unregistered = (await axios.put(`/api/students/${id}`, {campusId: null})).data;
+    dispatch(_unregisterStudent(unregistered));
+  }
+};
 
 
 const destroyStudent = (student, history) => {
@@ -168,6 +173,7 @@ const studentsReducer = (state = [], action) => {
     case CREATE_STUDENT:
       return [...state, action.student];
     case UPDATE_STUDENT:
+      case UNREGISTER_STUDENT:
       return state.map(student => student.id !== action.student.id ? student: action.student);
     case DESTROY_STUDENT:
       return state.filter(student => student.id !== action.student.id);
@@ -186,4 +192,4 @@ const reducer = combineReducers({
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export {getCampuses, createCampus, updateCampus, destroyCampus, getStudents, createStudent, updateStudent, destroyStudent};
+export {getCampuses, createCampus, updateCampus, destroyCampus, getStudents, createStudent, updateStudent, unregisterStudent, destroyStudent};

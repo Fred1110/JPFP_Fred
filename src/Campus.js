@@ -3,8 +3,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {destroyCampus} from './store';
 import {Link} from 'react-router-dom';
+import Unregister from './Unregister'
 
-const Campus = ({campus, student, unregister, destroy}) => {
+
+const Campus = ({campus, student, destroy}) => {
   if(!campus.id){
     return '...loading campus'
   }
@@ -24,7 +26,7 @@ const Campus = ({campus, student, unregister, destroy}) => {
                 <Link to={`/students/${std.id}`}>
                   {std.firstName} {std.lastName}
                   </Link>
-                {/* <button onClick = {() => unregister(student.campusId)}>Unregister</button> */}
+                  <Unregister campusId = {campus.id} id = {std.id} />
               </li>
               )
             }) : 'Currently No Student'
