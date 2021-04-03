@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createStudent} from './effects';
+import {createStudent} from '../redux/effects';
 import {Link} from 'react-router-dom';
 
 class StudentCreate extends Component{

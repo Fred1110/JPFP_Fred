@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {createCampus} from './effects';
+import {createCampus} from '../redux/effects';
 import {Link} from 'react-router-dom';
 
 class CampusCreate extends Component{

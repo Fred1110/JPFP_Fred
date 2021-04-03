@@ -1,7 +1,7 @@
 //need more work on update
 import React from 'react';
 import {connect} from 'react-redux';
-import {destroyCampus} from '../effects';
+import {destroyCampus} from '../redux/effects';
 import {Link} from 'react-router-dom';
 import Unregister from './Unregister'
 

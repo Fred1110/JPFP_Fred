@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getCampuses, getStudents} from './effects'
+import {getCampuses, getStudents} from '../redux/effects'
 import {Switch, HashRouter as Router, Route, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Nav from './Nav';

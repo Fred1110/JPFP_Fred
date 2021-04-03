@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {GET_CAMPUSES, CREATE_CAMPUS, DESTROY_CAMPUS, UPDATE_CAMPUS, GET_STUDENTS, CREATE_STUDENT, DESTROY_STUDENT, UPDATE_STUDENT, UNREGISTER_STUDENT} from './constants'
 
 const campusesReducer = (state=[], action) => {
@@ -32,7 +33,9 @@ const studentsReducer = (state = [], action) => {
 };
 
 //combine reducers
-export const reducer = combineReducers({
+const reducer = combineReducers({
   campuses: campusesReducer,
   students: studentsReducer,
-})
+});
+
+export default reducer;

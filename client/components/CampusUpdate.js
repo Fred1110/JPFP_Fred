@@ -1,7 +1,7 @@
 //need more work on update
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updateCampus} from './effects';
+import {updateCampus} from '../redux/effects';
 import {Link} from 'react-router-dom';
 
 class CampusUpdate extends Component {

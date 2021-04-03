@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {destroyStudent} from './effects';
+import {destroyStudent} from '../redux/effects';
 
 const Students = ({students, destroy}) => {
  return(

@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const Students = require('../db/Students');
-const Campuses = require('../db/Campuses');
+// const Students = require('../db/index');
+// const Campuses = require('../db/index');
+const {models: {Students, Campuses}} = require('../db/index')
 
-Campuses.hasMany(Students);
-Students.belongsTo(Campuses);
+// Campuses.hasMany(Students);
+// Students.belongsTo(Campuses);
 //student router
 //get all students
 router.get('/', async(req, res, next) => {

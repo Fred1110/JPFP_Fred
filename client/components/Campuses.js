@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {destroyCampus} from './effects';
+import {destroyCampus} from '../redux/effects';
 
 const Campuses = ({campuses, destroy}) => {
 
