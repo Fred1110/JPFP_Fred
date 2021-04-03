@@ -8,6 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/dist', static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, '../public/index.html')));
 
