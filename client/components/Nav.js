@@ -4,11 +4,14 @@ import {Link} from 'react-router-dom';
 
 const Nav = ({ campuses, students })=> {
   return(
-      <nav>
+
+      <nav className='home'>
           <Link to='/' >HOME</Link>
           <Link to='/campuses'>CAMPUSES ({campuses.length})</Link>
           <Link to='/students'>STUDENTS ({students.length})</Link>
       </nav>
+
+
   )
 }
 

@@ -1,0 +1,67 @@
+body {
+  font-family: Impact;
+  color:papayawhip;
+  background-image:
+  linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0, 255, 179, 0.5)),
+  url('https://wallpapercave.com/wp/zNbOZi3.jpg');
+  background-size: cover;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 200px;
+}
+
+.campuses img{
+  height: 300px;
+  width: 500px;
+  transition: box-shadow 0.5s ease;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+.campus img {
+  height: 700px;
+  width: 1000px;
+  transition: box-shadow 0.5s ease;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+.students img{
+  height: 600px;
+  width: 300px;
+  transition: box-shadow 0.5s ease;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+nav {
+ display: flex ;
+ justify-content: space-around;
+ font-size: 3rem;
+}
+
+iframe {
+  width: 720px;
+  height: 410px;
+  margin: 100 auto;
+  background-color: #777;
+  display:block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+input, button {
+  height: 3rem;
+}
+form > * {
+  margin: 1rem;
+}
+
+

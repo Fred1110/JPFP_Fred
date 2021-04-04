@@ -10,12 +10,12 @@ const Students = ({students, destroy}) => {
      {
        students.map(student=> {
          return(
-           <li key = {student.id}>
+           <li className = 'students' key = {student.id}>
              <Link to={`/students/${student.id}`}>
              <img key = {student.id} src={student.imageUrl}/>
              <h2>{student.firstName}</h2>
                </Link>
-              <button onClick={()=> destroy(student)}>X</button>
+              <button className= 'del_Student'onClick={()=> destroy(student)}>X</button>
            </li>
          )
        })

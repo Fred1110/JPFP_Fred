@@ -16,7 +16,7 @@ const Campuses = ({campuses, destroy}) => {
                <img key = {campuses.id} src={campus.imageUrl}/>
                <h2>{campus.name}</h2>
                </Link>
-              <button onClick={()=> destroy(campus)}>X</button>
+              <button className = 'del_Campus'onClick={()=> destroy(campus)}>X</button>
            </li>
          )
        })

@@ -12,7 +12,7 @@ const Campus = ({campus, student, destroy}) => {
   }
 
   return(
-    <div >
+    <div className = 'campus'>
       <img key={campus.id} src={campus.imageUrl} />
       <h2>{campus.name}</h2>
       <br />

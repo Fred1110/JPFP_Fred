@@ -3,6 +3,7 @@ import {getCampuses, getStudents} from '../redux/effects'
 import {Switch, HashRouter as Router, Route, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Nav from './Nav';
+import Video from './Video';
 import Campuses from './Campuses';
 import Campus from './Campus';
 import CampusUpdate from './CampusUpdate';
@@ -31,16 +32,8 @@ class Main extends Component {
     this.props.loadStudents()
   }
 
-  // unregister(){
-  //   this.setState({campusId: 0})
-  // }
-
   render(){
-    // const {campusId} = this.state
-    // const unregister = this.unregister
     return (
-      // <div id='main'>
-      //   <Campus campusId = {campusId} unregister = {unregister} />
       <Router>
         <div>
           <h1>
@@ -48,7 +41,9 @@ class Main extends Component {
             </h1>
             <Route path = '/'><Nav /></Route>
 
+
           <Switch>
+            <Route path = '/' exact><Video /></Route>
             <Route path='/campuses' exact component = {Campuses} />
             <Route path = '/campuses/create' component = {CampusCreate} />
             <Route path='/students' exact component  = {Students} />

@@ -8,18 +8,18 @@ const Student = ({student, campus}) => {
   }
   return (
     <div>
-      <h3>Student details for {student.name}</h3>
+      <h2>Student details for {student.name}</h2>
       <br />
       <ul>
         <li key = {student.id}>
           <img key ={student.id} src={student.imageUrl} />
-          <h4>First Name: {student.firstName}</h4>
-          <h4>Last Name: {student.lastName}</h4>
+          <h3>First Name: {student.firstName}</h3>
+          <h3>Last Name: {student.lastName}</h3>
 
-          <h4>Campus: {campus ? <Link to={`/campuses/${campus.id}`}> {campus.name} </Link>: 'Currently Not Enrolled' }</h4>
+          <h3>Campus: {campus ? <Link to={`/campuses/${campus.id}`}> {campus.name} </Link>: 'Currently Not Enrolled' }</h3>
 
-          <h4>Email: {student.email}</h4>
-          <h4>GPA: {student.gpa}</h4>
+          <h3>Email: {student.email}</h3>
+          <h3>GPA: {student.gpa}</h3>
           <Link to={`/students/${student.id}/update`}>UPDATE</Link>
         </li>
       </ul>
